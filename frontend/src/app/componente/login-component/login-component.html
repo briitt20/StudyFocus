@@ -1,0 +1,192 @@
+<div class="pantalla_iniciar_sesion">
+  <div class="sesion_caja">
+    <div class="text-center mb-2">
+      <img
+        src="logo.jpeg"
+        alt="Logo StudyFocus"
+        class="img-fluid mx-auto d-block"
+        style="width: 130px; height: 130px; object-fit: contain; border-radius: 50%"
+      />
+    </div>
+    <div class="text-center mb-4">
+      <div class="small fw-semibold text-uppercase text-muted">
+        PLATAFORMA ACADÉMICA • <span class="text-primary">StudyFocus</span>
+      </div>
+      <h1 class="h4 fw-bold mt-1">Iniciar Sesión en StudyFocus</h1>
+      <p class="text-muted small mb-0">
+        Tu espacio universitario para aprender métodos de estudio y registrar tu concentración.
+      </p>
+    </div>
+
+    <div class="sesion_pestanas mb-4">
+      <button
+        type="button"
+        class="sesion_pestana_boton"
+        [class.active]="modo === 'acceso'"
+        (click)="cambiarModo('acceso')"
+      >
+        <i class="bi bi-lock me-1"></i> Acceso
+      </button>
+      <button
+        type="button"
+        class="sesion_pestana_boton"
+        [class.active]="modo === 'registro'"
+        (click)="cambiarModo('registro')"
+      >
+        <i class="bi bi-person-plus me-1"></i> Registro
+      </button>
+    </div>
+
+    @if (modo === 'acceso') {
+      <form
+        (ngSubmit)="iniciarSesion()"
+        #formAcceso="ngForm"
+        [class.was-validated]="intentoAcceso"
+        novalidate
+      >
+        <div class="mb-3">
+          <label for="correo_login" class="form-label small fw-semibold">Correo electrónico</label>
+          <div class="input-group">
+            <span class="input-group-text bg-white"><i class="bi bi-envelope text-muted"></i></span>
+            <input
+              type="email"
+              id="correo_login"
+              name="correo"
+              [(ngModel)]="loginData.correo"
+              class="form-control"
+              placeholder="estudiante@universidad.edu.pe"
+              required
+            />
+            <div class="invalid-feedback">Ingresa un correo institucional válido.</div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="campo_clave_login" class="form-label small fw-semibold">Contraseña</label>
+          <div class="input-group">
+            <span class="input-group-text bg-white"><i class="bi bi-key text-muted"></i></span>
+            <input
+              [type]="mostrarClave ? 'text' : 'password'"
+              id="campo_clave_login"
+              name="clave"
+              [(ngModel)]="loginData.clave"
+              class="form-control"
+              placeholder="••••••••••••"
+              minlength="6"
+              required
+            />
+            <button
+              class="btn btn-outline-secondary"
+              type="button"
+              (click)="mostrarClave = !mostrarClave"
+            >
+              <i class="bi" [ngClass]="mostrarClave ? 'bi-eye-slash' : 'bi-eye'"></i>
+            </button>
+            <div class="invalid-feedback">La contraseña debe tener al menos 6 caracteres.</div>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mb-4 small">
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="recordar_sesion"
+              name="recordar"
+              [(ngModel)]="loginData.recordar"
+            />
+            <label class="form-check-label text-muted" for="recordar_sesion">Recordar sesión</label>
+          </div>
+          <a href="javascript:void(0)" class="text-primary text-decoration-none fw-medium"
+            >¿Olvidaste tu clave?</a
+          >
+        </div>
+
+        <button type="submit" class="btn boton_principal w-100 py-2 mb-3">
+          Iniciar Sesión <i class="bi bi-arrow-right ms-1"></i>
+        </button>
+      </form>
+    }
+
+    @if (modo === 'registro') {
+      <form
+        (ngSubmit)="registrarCuenta()"
+        #formRegistro="ngForm"
+        [class.was-validated]="intentoRegistro"
+        novalidate
+      >
+        <div class="mb-3">
+          <label for="nombres_registro" class="form-label small fw-semibold">Nombres</label>
+          <input
+            type="text"
+            id="nombres_registro"
+            name="nombres"
+            [(ngModel)]="registroData.nombres"
+            class="form-control"
+            placeholder="Nombres del estudiante"
+            required
+          />
+          <div class="invalid-feedback">Ingresa tus nombres.</div>
+        </div>
+        <div class="mb-3">
+          <label for="apellidos_registro" class="form-label small fw-semibold">Apellidos</label>
+          <input
+            type="text"
+            id="apellidos_registro"
+            name="apellidos"
+            [(ngModel)]="registroData.apellidos"
+            class="form-control"
+            placeholder="Apellidos del estudiante"
+            required
+          />
+          <div class="invalid-feedback">Ingresa tus apellidos.</div>
+        </div>
+        <div class="mb-3">
+          <label for="correo_registro" class="form-label small fw-semibold"
+            >Correo universitario</label
+          >
+          <input
+            type="email"
+            id="correo_registro"
+            name="correo"
+            [(ngModel)]="registroData.correo"
+            class="form-control"
+            placeholder="estudiante@universidad.edu.pe"
+            required
+          />
+          <div class="invalid-feedback">Ingresa un correo válido.</div>
+        </div>
+        <div class="mb-3">
+          <label for="clave_registro" class="form-label small fw-semibold">Crear contraseña</label>
+          <input
+            type="password"
+            id="clave_registro"
+            name="clave"
+            [(ngModel)]="registroData.clave"
+            class="form-control"
+            minlength="6"
+            required
+          />
+          <div class="invalid-feedback">Mínimo 6 caracteres.</div>
+        </div>
+        @if (registroExitoso) {
+          <div class="alert alert-success py-2 small">
+            ¡Cuenta registrada! Ahora puedes iniciar sesión.
+          </div>
+        }
+        <button type="submit" class="btn boton_principal w-100 py-2 mb-3">
+          Crear cuenta universitaria
+        </button>
+      </form>
+    }
+
+    <div class="text-center mt-3">
+      <a routerLink="/" class="small text-muted text-decoration-none d-block mb-3"
+        ><i class="bi bi-arrow-left"></i> Volver a la portada pública</a
+      >
+      <span class="sesion_etiqueta_pie"
+        ><i class="bi bi-lightbulb"></i> Técnicas Pomodoro, Feynman y Registro de Sesiones</span
+      >
+    </div>
+  </div>
+</div>
