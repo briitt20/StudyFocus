@@ -1,0 +1,134 @@
+<div class="pantalla_metodo_cornell">
+  <nav class="navbar navbar-expand-lg barra_navegacion sticky-top">
+    <div class="container">
+      <a class="barra_navegacion_marca" routerLink="/inicio">
+        <span class="barra_navegacion_icono"><i class="bi bi-stopwatch"></i></span>
+        StudyFocus
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#menu_principal"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="menu_principal">
+        <ul class="navbar-nav mx-auto gap-1">
+          <li class="nav-item"><a class="nav-link" routerLink="/inicio">Inicio</a></li>
+          <li class="nav-item">
+            <a class="nav-link active" routerLink="/metodos">Métodos de Estudio</a>
+          </li>
+          <li class="nav-item"><a class="nav-link" routerLink="/sesion">Sesión Actual</a></li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/concentracion">Historial de Concentración</a>
+          </li>
+          <li class="nav-item"><a class="nav-link" routerLink="/calendario">Calendario</a></li>
+        </ul>
+        <div class="d-flex align-items-center gap-2">
+          <a routerLink="/perfil" class="barra_navegacion_usuario text-decoration-none">
+            <i class="bi bi-mortarboard-fill text-primary me-1"></i> Perfil Académico
+          </a>
+          <a routerLink="/login" class="btn btn-outline-secondary btn-sm rounded-pill">
+            <i class="bi bi-box-arrow-right"></i> Cerrar sesión
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <main class="container py-5">
+    <form (ngSubmit)="guardarApunte()">
+      <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3">
+        <div>
+          <span class="etiqueta_suave mb-2"
+            >TÉCNICA DE APRENDIZAJE ACTIVO • Formato Cornell 3 Zonas</span
+          >
+          <h2 class="fw-bold mb-0">Método Cornell - Cuaderno Estructurado de Notas</h2>
+        </div>
+        <button type="submit" class="btn boton_principal">
+          <i class="bi bi-save me-1"></i> Guardar Apunte
+        </button>
+      </div>
+
+      @if (apunteGuardado) {
+        <div class="alert alert-success py-2 small">
+          Apunte estructurado guardado en la base de datos.
+        </div>
+      }
+
+      <div class="cornell_hoja mb-4">
+        <div
+          class="p-3 bg-light border-bottom d-flex flex-wrap justify-content-between align-items-center gap-2"
+        >
+          <div class="d-flex align-items-center gap-2 flex-grow-1">
+            <span class="badge bg-primary">Fisiología Médica II</span>
+            <input
+              type="text"
+              name="titulo_apunte"
+              [(ngModel)]="apunte.titulo"
+              class="form-control form-control-sm fw-bold"
+              required
+            />
+          </div>
+          <span class="small text-muted">24 Noviembre, 2025 · Unidad 4</span>
+        </div>
+
+        <div class="row g-0">
+          <div class="col-md-4 cornell_columna_claves">
+            <h6 class="fw-bold text-primary small text-uppercase mb-3">
+              Columna Izquierda (30%) · Preguntas Clave
+            </h6>
+            <div class="mb-3 p-2 bg-white rounded border small">
+              <strong>¿Qué estímulo libera renina?</strong>
+              <div class="text-muted">Células YXG renales / Disminución de PAM</div>
+            </div>
+            <div class="mb-3 p-2 bg-white rounded border small">
+              <strong>Efectos biológicos de Angiotensina II</strong>
+              <div class="text-muted">Acción dual vascular y hormonal</div>
+            </div>
+            <div class="mb-3 p-2 bg-white rounded border small">
+              <strong>Rol de la aldosterona</strong>
+              <div class="text-muted">Reabsorción Na+ y excreción K+/H+</div>
+            </div>
+            <textarea
+              name="preguntas_clave"
+              [(ngModel)]="apunte.preguntasClave"
+              class="form-control form-control-sm"
+              rows="2"
+              placeholder="Escribe nuevas preguntas clave aquí..."
+            ></textarea>
+          </div>
+
+          <div class="col-md-8 cornell_columna_notas">
+            <h6 class="fw-bold text-dark small text-uppercase mb-3">
+              Columna Derecha (70%) · Notas de Clase & Esquemas
+            </h6>
+            <textarea
+              name="contenido_notas"
+              [(ngModel)]="apunte.notas"
+              class="form-control"
+              rows="10"
+              required
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="cornell_fila_resumen">
+          <label
+            for="resumen_cornell"
+            class="form-label small fw-bold text-primary text-uppercase mb-1"
+            >Síntesis Final (Condensa lo fundamental en 3 líneas)</label
+          >
+          <textarea
+            id="resumen_cornell"
+            name="resumen_final"
+            [(ngModel)]="apunte.resumen"
+            class="form-control form-control-sm"
+            rows="2"
+            required
+          ></textarea>
+        </div>
+      </div>
+    </form>
+  </main>
+</div>

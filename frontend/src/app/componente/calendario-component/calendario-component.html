@@ -1,0 +1,244 @@
+<div class="pantalla_calendario_academico">
+  <nav class="navbar navbar-expand-lg barra_navegacion sticky-top">
+    <div class="container">
+      <a class="barra_navegacion_marca" routerLink="/inicio">
+        <span class="barra_navegacion_icono"><i class="bi bi-stopwatch"></i></span>
+        StudyFocus
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#menu_principal"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="menu_principal">
+        <ul class="navbar-nav mx-auto gap-1">
+          <li class="nav-item"><a class="nav-link" routerLink="/inicio">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/metodos">Métodos de Estudio</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/sesion">Sesión Actual</a></li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/concentracion">Historial de Concentración</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" routerLink="/calendario">Calendario</a>
+          </li>
+        </ul>
+        <div class="d-flex align-items-center gap-2">
+          <a routerLink="/perfil" class="barra_navegacion_usuario text-decoration-none">
+            <i class="bi bi-mortarboard-fill text-primary me-1"></i> Perfil Académico
+          </a>
+          <a routerLink="/login" class="btn btn-outline-secondary btn-sm rounded-pill">
+            <i class="bi bi-box-arrow-right"></i> Cerrar sesión
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <main class="container py-5">
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3">
+      <div>
+        <span class="etiqueta_suave mb-2">GESTIÓN SEMESTRAL / Ciclo 2025-1</span>
+        <h2 class="fw-bold mb-0">Calendario Académico - Noviembre 2025</h2>
+      </div>
+      <div class="d-flex gap-3">
+        <div class="tarjeta_sistema px-3 py-2 text-center">
+          <div class="small text-muted">Exámenes</div>
+          <div class="fw-bold text-danger">4</div>
+        </div>
+        <div class="tarjeta_sistema px-3 py-2 text-center">
+          <div class="small text-muted">Horas est.</div>
+          <div class="fw-bold text-primary">38h</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-lg-8">
+        <div class="tarjeta_sistema p-3">
+          <div class="table-responsive">
+            <table class="table table-bordered calendario_tabla mb-0">
+              <thead>
+                <tr>
+                  <th>LUN</th>
+                  <th>MAR</th>
+                  <th>MIÉ</th>
+                  <th>JUE</th>
+                  <th>VIE</th>
+                  <th>SÁB</th>
+                  <th>DOM</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="text-muted">27</td>
+                  <td class="text-muted">28</td>
+                  <td class="text-muted">29</td>
+                  <td class="text-muted">30</td>
+                  <td class="text-muted">31</td>
+                  <td>1</td>
+                  <td>2</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>4</td>
+                  <td>
+                    5
+                    <span class="calendario_etiqueta_evento bg-danger-subtle text-danger"
+                      >Parcial Fisio</span
+                    >
+                  </td>
+                  <td>
+                    6
+                    <span class="calendario_etiqueta_evento bg-primary-subtle text-primary"
+                      >Guía Cálculo</span
+                    >
+                  </td>
+                  <td>
+                    7
+                    <span class="calendario_etiqueta_evento bg-success-subtle text-success"
+                      >Informe Lab</span
+                    >
+                  </td>
+                  <td>8</td>
+                  <td>9</td>
+                </tr>
+                <tr>
+                  <td>10</td>
+                  <td>
+                    11
+                    <span class="calendario_etiqueta_evento bg-warning-subtle text-warning"
+                      >Quiz Patolog.</span
+                    >
+                  </td>
+                  <td>12</td>
+                  <td>13</td>
+                  <td>
+                    14
+                    <span class="calendario_etiqueta_evento bg-danger-subtle text-danger"
+                      >Examen Farm.</span
+                    >
+                  </td>
+                  <td class="bg-primary-subtle"><strong>15 HOY</strong></td>
+                  <td>16</td>
+                </tr>
+                <tr>
+                  <td>
+                    17
+                    <span class="calendario_etiqueta_evento bg-primary-subtle text-primary"
+                      >Entrega Proy.</span
+                    >
+                  </td>
+                  <td>18</td>
+                  <td>
+                    19
+                    <span class="calendario_etiqueta_evento bg-danger-subtle text-danger"
+                      >Parcial Bioest.</span
+                    >
+                  </td>
+                  <td>20</td>
+                  <td>21</td>
+                  <td>22</td>
+                  <td>23</td>
+                </tr>
+                <tr>
+                  <td>24</td>
+                  <td>25</td>
+                  <td>
+                    26
+                    <span class="calendario_etiqueta_evento bg-danger-subtle text-danger"
+                      >Final Genética</span
+                    >
+                  </td>
+                  <td>27</td>
+                  <td>28</td>
+                  <td>29</td>
+                  <td>30</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="tarjeta_sistema p-4">
+          <h6 class="fw-bold mb-3">Agregar nueva actividad</h6>
+          <form (ngSubmit)="guardarActividad()">
+            <div class="mb-2">
+              <label for="titulo_actividad" class="form-label small fw-semibold"
+                >Título de la actividad</label
+              >
+              <input
+                type="text"
+                id="titulo_actividad"
+                name="titulo"
+                [(ngModel)]="nuevaActividad.titulo"
+                class="form-control form-control-sm"
+                placeholder="Ej: Entrega de Proyecto Final"
+                required
+              />
+            </div>
+            <div class="row g-2 mb-2">
+              <div class="col-6">
+                <label for="tipo_actividad" class="form-label small fw-semibold">Tipo</label>
+                <select
+                  id="tipo_actividad"
+                  name="tipo"
+                  [(ngModel)]="nuevaActividad.tipo"
+                  class="form-select form-select-sm"
+                >
+                  <option value="tarea">Tarea/Trabajo</option>
+                  <option value="examen">Examen</option>
+                  <option value="laboratorio">Laboratorio</option>
+                </select>
+              </div>
+              <div class="col-6">
+                <label for="curso_actividad" class="form-label small fw-semibold">Asignatura</label>
+                <input
+                  type="text"
+                  id="curso_actividad"
+                  name="asignatura"
+                  [(ngModel)]="nuevaActividad.asignatura"
+                  class="form-control form-control-sm"
+                  required
+                />
+              </div>
+            </div>
+            <div class="row g-2 mb-3">
+              <div class="col-6">
+                <label for="fecha_actividad" class="form-label small fw-semibold">Fecha</label>
+                <input
+                  type="date"
+                  id="fecha_actividad"
+                  name="fecha"
+                  [(ngModel)]="nuevaActividad.fecha"
+                  class="form-control form-control-sm"
+                  required
+                />
+              </div>
+              <div class="col-6">
+                <label for="hora_actividad" class="form-label small fw-semibold">Hora</label>
+                <input
+                  type="time"
+                  id="hora_actividad"
+                  name="hora"
+                  [(ngModel)]="nuevaActividad.hora"
+                  class="form-control form-control-sm"
+                  required
+                />
+              </div>
+            </div>
+            @if (actividadGuardada) {
+              <div class="alert alert-success py-1 small">Actividad agregada al calendario.</div>
+            }
+            <button type="submit" class="btn boton_principal btn-sm w-100">
+              Guardar actividad en el calendario
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

@@ -1,0 +1,103 @@
+<div class="pantalla_sesion_activa">
+  <nav class="navbar navbar-expand-lg barra_navegacion sticky-top">
+    <div class="container">
+      <a class="barra_navegacion_marca" routerLink="/inicio">
+        <span class="barra_navegacion_icono"><i class="bi bi-stopwatch"></i></span>
+        StudyFocus
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#menu_principal"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="menu_principal">
+        <ul class="navbar-nav mx-auto gap-1">
+          <li class="nav-item"><a class="nav-link" routerLink="/inicio">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/metodos">Métodos de Estudio</a></li>
+          <li class="nav-item">
+            <a class="nav-link active" routerLink="/sesion">Sesión Actual</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/concentracion">Historial de Concentración</a>
+          </li>
+          <li class="nav-item"><a class="nav-link" routerLink="/calendario">Calendario</a></li>
+        </ul>
+        <div class="d-flex align-items-center gap-2">
+          <a routerLink="/perfil" class="barra_navegacion_usuario text-decoration-none">
+            <i class="bi bi-mortarboard-fill text-primary me-1"></i> Perfil Académico
+          </a>
+          <a routerLink="/login" class="btn btn-outline-secondary btn-sm rounded-pill">
+            <i class="bi bi-box-arrow-right"></i> Cerrar sesión
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <main class="container py-5">
+    <div class="sesion_contenedor_enfoque">
+      <div class="tarjeta_sistema p-4 p-md-5">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <span class="badge bg-success-subtle text-success px-3 py-2 rounded-pill">
+            <i class="bi bi-record-circle me-1"></i> Sesión Activa · Estado: En curso
+          </span>
+          <span class="small text-muted">24 de Octubre · 10:30 AM</span>
+        </div>
+
+        <h2 class="fw-bold mb-2">Espacio de Concentración</h2>
+        <p class="text-muted small mb-4">
+          Mantén tu atención anclada en una sola tarea académica. La reducción de estímulos externos
+          fortalece la retención y la comprensión profunda.
+        </p>
+
+        <div
+          class="p-3 bg-primary-subtle rounded-3 mb-4 d-flex flex-wrap justify-content-between align-items-center gap-2"
+        >
+          <div>
+            <div class="small fw-bold text-primary text-uppercase">Método de Estudio Activo</div>
+            <h5 class="fw-bold mb-0">Técnica Pomodoro (25 min enfoque / 5 min descanso)</h5>
+          </div>
+          <span class="badge bg-primary">Registro confirmado</span>
+        </div>
+
+        <h6 class="fw-bold mb-3">Instrucciones para aplicar el método (3 pautas cardinales)</h6>
+        <div class="d-flex flex-column gap-3 mb-4">
+          <div class="sesion_regla_item">
+            <strong class="text-primary">01 · Aislamiento de recursos:</strong>
+            <p class="small text-muted mb-0 mt-1">
+              Ten a mano únicamente el material de lectura o apuntes de la materia. Despeja
+              cualquier libro secundario o papelería ajena al tema actual.
+            </p>
+          </div>
+          <div class="sesion_regla_item">
+            <strong class="text-primary">02 · Blindaje contra la dispersión:</strong>
+            <p class="small text-muted mb-0 mt-1">
+              Trabaja en la tarea sin revisar redes sociales ni pestañas secundarias durante el
+              bloque de enfoque. Apaga notificaciones periféricas.
+            </p>
+          </div>
+          <div class="sesion_regla_item">
+            <strong class="text-primary">03 · Pausa reparadora obligatoria:</strong>
+            <p class="small text-muted mb-0 mt-1">
+              Al concluir el ciclo, toma tu receso de 5 minutos antes de reiniciar. Levántate del
+              asiento, descansa la vista e hidrátate.
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="d-flex flex-wrap justify-content-between align-items-center pt-3 border-top gap-3"
+        >
+          <span class="small text-muted"
+            >El progreso se registrará en tu historial de concentración al concluir.</span
+          >
+          <a routerLink="/concentracion" class="btn btn-danger px-4 fw-semibold"
+            >Finalizar sesión</a
+          >
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

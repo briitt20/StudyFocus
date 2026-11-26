@@ -1,0 +1,137 @@
+<div class="pantalla_inicio">
+  <nav class="navbar navbar-expand-lg barra_navegacion sticky-top">
+    <div class="container">
+      <a class="barra_navegacion_marca" routerLink="/inicio">
+        <span class="barra_navegacion_icono"><i class="bi bi-stopwatch"></i></span>
+        StudyFocus
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#menu_principal"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="menu_principal">
+        <ul class="navbar-nav mx-auto gap-1">
+          <li class="nav-item"><a class="nav-link active" routerLink="/inicio">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/metodos">Métodos de Estudio</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/sesion">Sesión Actual</a></li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/concentracion">Historial de Concentración</a>
+          </li>
+          <li class="nav-item"><a class="nav-link" routerLink="/calendario">Calendario</a></li>
+        </ul>
+        <div class="d-flex align-items-center gap-2">
+          <a routerLink="/perfil" class="barra_navegacion_usuario text-decoration-none">
+            <i class="bi bi-mortarboard-fill text-primary me-1"></i> Perfil Académico
+          </a>
+          <a routerLink="/login" class="btn btn-outline-secondary btn-sm rounded-pill">
+            <i class="bi bi-box-arrow-right"></i> Cerrar sesión
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <main class="container py-5">
+    <div class="inicio_tarjeta_bienvenida mb-5">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-7">
+          <span class="etiqueta_suave mb-3"
+            ><i class="bi bi-circle-fill small"></i> ESPACIO DE TRABAJO LIBRE DE DISTRACCIONES</span
+          >
+          <h1 class="fw-bold display-6 mb-3">
+            ¡Hola! Bienvenido a <span class="text-primary">StudyFocus</span>
+          </h1>
+          <p class="text-muted mb-4">
+            Aprende a dominar técnicas de estudio efectivas, aplícalas paso a paso en tus sesiones y
+            evalúa tu nivel de concentración al terminar para mejorar tu rendimiento académico.
+          </p>
+          <a routerLink="/metodos" class="btn boton_principal btn-lg px-4"
+            >Comenzar a estudiar <i class="bi bi-arrow-right ms-1"></i
+          ></a>
+        </div>
+        <div class="col-lg-5">
+          <div class="inicio_banner_enfoque">
+            <span class="badge bg-white text-success shadow-sm px-3 py-2 rounded-pill mb-3">
+              <i class="bi bi-check-circle-fill me-1"></i> Mente despejada · 100% Enfoque
+            </span>
+            <h5 class="fw-bold">Tu entorno listo</h5>
+            <p class="small text-muted mb-3">
+              Acceso rápido a tus herramientas cognitivas y seguimiento de bloques.
+            </p>
+            <div class="d-flex justify-content-center gap-2">
+              <a routerLink="/pomodoro" class="btn btn-sm btn-primary">Temporizador</a>
+              <a routerLink="/calendario" class="btn btn-sm btn-outline-primary">Calendario</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <span class="small fw-bold text-primary text-uppercase">RUTA DE APRENDIZAJE</span>
+      <h3 class="fw-bold">Tu ciclo de estudio en 3 sencillos pasos</h3>
+      <p class="text-muted small">
+        Una metodología minimalista para transformar tu tiempo de estudio en resultados tangibles.
+      </p>
+    </div>
+
+    <div class="row g-4 mb-4">
+      <div class="col-md-4">
+        <div class="inicio_tarjeta_paso">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <span class="badge bg-primary rounded-circle p-2 px-3">1</span>
+            <span class="inicio_etiqueta_paso">Paso preparatorio</span>
+          </div>
+          <h5 class="fw-bold">Elige un método</h5>
+          <p class="text-muted small mb-0">
+            Selecciona una técnica probada como Pomodoro, Recuperación Activa o Método Cornell según
+            la complejidad de tu materia.
+          </p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="inicio_tarjeta_paso">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <span class="badge bg-primary rounded-circle p-2 px-3">2</span>
+            <span class="inicio_etiqueta_paso">En ejecución activa</span>
+          </div>
+          <h5 class="fw-bold">Estudia enfocado</h5>
+          <p class="text-muted small mb-0">
+            Inicia tu temporizador de concentración profunda. Guarda las notificaciones y sigue las
+            fases guiadas sin interrupciones.
+          </p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="inicio_tarjeta_paso">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <span class="badge bg-primary rounded-circle p-2 px-3">3</span>
+            <span class="inicio_etiqueta_paso">Cierre y reflexión</span>
+          </div>
+          <h5 class="fw-bold">Registra tu concentración</h5>
+          <p class="text-muted small mb-0">
+            Evalúa en segundos tu grado de atención y cómo te sentiste al terminar. Una
+            autoevaluación simple para ajustar tu ritmo.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="tarjeta_sistema p-4 d-flex flex-wrap justify-content-between align-items-center gap-3"
+    >
+      <div>
+        <span class="badge bg-warning-subtle text-warning mb-1">Consejo universitario de hoy</span>
+        <div class="fw-semibold">
+          La constancia en bloques de 25 minutos supera sesiones maratónicas desorganizadas.
+        </div>
+      </div>
+      <a routerLink="/pomodoro" class="btn btn-outline-primary fw-semibold"
+        >Ir directamente al temporizador <i class="bi bi-chevron-right"></i
+      ></a>
+    </div>
+  </main>
+</div>

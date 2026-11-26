@@ -1,0 +1,172 @@
+<div class="pantalla_metodo_pomodoro">
+  <nav class="navbar navbar-expand-lg barra_navegacion sticky-top">
+    <div class="container">
+      <a class="barra_navegacion_marca" routerLink="/inicio">
+        <span class="barra_navegacion_icono"><i class="bi bi-stopwatch"></i></span>
+        StudyFocus
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#menu_principal"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="menu_principal">
+        <ul class="navbar-nav mx-auto gap-1">
+          <li class="nav-item"><a class="nav-link" routerLink="/inicio">Inicio</a></li>
+          <li class="nav-item">
+            <a class="nav-link active" routerLink="/metodos">Métodos de Estudio</a>
+          </li>
+          <li class="nav-item"><a class="nav-link" routerLink="/sesion">Sesión Actual</a></li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/concentracion">Historial de Concentración</a>
+          </li>
+          <li class="nav-item"><a class="nav-link" routerLink="/calendario">Calendario</a></li>
+        </ul>
+        <div class="d-flex align-items-center gap-2">
+          <a routerLink="/perfil" class="barra_navegacion_usuario text-decoration-none">
+            <i class="bi bi-mortarboard-fill text-primary me-1"></i> Perfil Académico
+          </a>
+          <a routerLink="/login" class="btn btn-outline-secondary btn-sm rounded-pill">
+            <i class="bi bi-box-arrow-right"></i> Cerrar sesión
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <main class="container py-5">
+    <div class="mb-4">
+      <span class="etiqueta_suave mb-2">TÉCNICA DE ALTO RENDIMIENTO • Ciclo Activo #2</span>
+      <h2 class="fw-bold">Método Pomodoro - Gestión de Bloques de Estudio</h2>
+      <p class="text-muted small">
+        Administra tu tiempo mediante intervalos de alta concentración y pausas deliberadas.
+      </p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <div class="tarjeta_sistema p-4 h-100">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h6 class="fw-bold mb-0">Tareas de la Sesión</h6>
+            <span class="badge bg-primary-subtle text-primary"
+              >{{ tareasCompletadas }}/{{ tareas.length }} listas</span
+            >
+          </div>
+          <div class="list-group list-group-flush small mb-3">
+            @for (tarea of tareas; track $index) {
+              <label class="list-group-item d-flex gap-2 align-items-start px-0">
+                <input
+                  class="form-check-input mt-1"
+                  type="checkbox"
+                  [(ngModel)]="tarea.completada"
+                />
+                <div>
+                  <div
+                    class="fw-semibold"
+                    [class.text-decoration-line-through]="tarea.completada"
+                    [class.text-muted]="tarea.completada"
+                  >
+                    {{ tarea.titulo }}
+                  </div>
+                  @if (tarea.prioridad) {
+                    <span class="badge bg-danger-subtle text-danger">{{ tarea.subtitulo }}</span>
+                  } @else {
+                    <span class="text-muted">{{ tarea.subtitulo }}</span>
+                  }
+                </div>
+              </label>
+            }
+          </div>
+          <form (ngSubmit)="agregarTarea()">
+            <div class="input-group input-group-sm">
+              <input
+                type="text"
+                name="titulo_tarea"
+                [(ngModel)]="nuevaTarea"
+                class="form-control"
+                placeholder="Agregar nueva micro-tarea..."
+                required
+              />
+              <button class="btn btn-primary" type="submit"><i class="bi bi-plus"></i></button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="pomodoro_caja_reloj h-100 d-flex flex-column justify-content-between">
+          <div class="d-flex justify-content-center gap-2 flex-wrap mb-3">
+            <button
+              type="button"
+              class="pomodoro_boton_modo"
+              [class.active]="minutosModo === 25"
+              (click)="seleccionarModo(25)"
+            >
+              Estudio (25m)
+            </button>
+            <button
+              type="button"
+              class="pomodoro_boton_modo"
+              [class.active]="minutosModo === 5"
+              (click)="seleccionarModo(5)"
+            >
+              Descanso (5m)
+            </button>
+            <button
+              type="button"
+              class="pomodoro_boton_modo"
+              [class.active]="minutosModo === 15"
+              (click)="seleccionarModo(15)"
+            >
+              Largo (15m)
+            </button>
+          </div>
+          <div>
+            <span class="badge bg-primary-subtle text-primary mb-2">BLOQUE FOCALIZADO</span>
+            <div class="pomodoro_tiempo">{{ tiempoFormateado }}</div>
+            <p class="small text-muted">Enfocado en: <strong>Fisiología Cardiovascular</strong></p>
+          </div>
+          <div class="d-flex gap-2 justify-content-center mt-3">
+            <button type="button" (click)="alternarTemporizador()" class="btn boton_principal px-4">
+              {{ textoBoton }}
+            </button>
+            <button
+              type="button"
+              (click)="reiniciarTemporizador()"
+              class="btn btn-outline-secondary"
+            >
+              Reiniciar
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="tarjeta_sistema p-4 h-100">
+          <h6 class="fw-bold mb-3">Rendimiento de Hoy</h6>
+          <div class="p-3 bg-light rounded-3 mb-3">
+            <div class="small text-muted">TIEMPO NETO ENFOCADO</div>
+            <div class="h3 fw-bold text-primary mb-1">
+              100 min <span class="fs-6 text-muted fw-normal">(4 bloques)</span>
+            </div>
+            <div class="progress" style="height: 8px">
+              <div class="progress-bar" style="width: 66%"></div>
+            </div>
+            <div class="d-flex justify-content-between small text-muted mt-1">
+              <span>Meta: 150 min</span>
+              <span>66%</span>
+            </div>
+          </div>
+          <p class="small text-muted mb-3">
+            Próximo hito: Descanso Largo (15 min) al finalizar bloque 4.
+          </p>
+          <a routerLink="/sesion" class="btn btn-outline-primary w-100 btn-sm"
+            >Ir a vista de Sesión Activa</a
+          >
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

@@ -1,0 +1,405 @@
+<div class="pantalla_metodos_estudio">
+  <nav class="navbar navbar-expand-lg barra_navegacion sticky-top">
+    <div class="container">
+      <a class="barra_navegacion_marca" routerLink="/inicio">
+        <span class="barra_navegacion_icono"><i class="bi bi-stopwatch"></i></span>
+        StudyFocus
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#menu_principal"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="menu_principal">
+        <ul class="navbar-nav mx-auto gap-1">
+          <li class="nav-item"><a class="nav-link" routerLink="/inicio">Inicio</a></li>
+          <li class="nav-item">
+            <a class="nav-link active" routerLink="/metodos">Métodos de Estudio</a>
+          </li>
+          <li class="nav-item"><a class="nav-link" routerLink="/sesion">Sesión Actual</a></li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/concentracion">Historial de Concentración</a>
+          </li>
+          <li class="nav-item"><a class="nav-link" routerLink="/calendario">Calendario</a></li>
+        </ul>
+        <div class="d-flex align-items-center gap-2">
+          <a routerLink="/perfil" class="barra_navegacion_usuario text-decoration-none">
+            <i class="bi bi-mortarboard-fill text-primary me-1"></i> Perfil Académico
+          </a>
+          <a routerLink="/login" class="btn btn-outline-secondary btn-sm rounded-pill">
+            <i class="bi bi-box-arrow-right"></i> Cerrar sesión
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <main class="container py-5">
+    <div class="tarjeta_sistema p-4 mb-4">
+      <div class="row align-items-center g-3">
+        <div class="col-md-8">
+          <span class="etiqueta_suave mb-2">ESTRATEGIAS DE APRENDIZAJE</span>
+          <h2 class="fw-bold mb-1">Métodos de Estudio</h2>
+          <p class="text-muted small mb-0">
+            Selecciona una técnica estructurada para mejorar tu concentración y optimizar tus
+            repasos universitarios.
+          </p>
+        </div>
+        <div class="col-md-4 text-md-end">
+          <div class="small text-muted">Estudiante Universitario · Medicina Humana (Semestre VII)</div>
+          <span class="badge bg-success-subtle text-success mt-1"
+            >Tasa de retención global: +38% vs. lectura pasiva</span
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-4 mb-5">
+      <div class="col-md-6 col-lg-3">
+        <div class="metodo_tarjeta">
+          <div>
+            <div class="d-flex justify-content-between mb-3">
+              <span class="badge bg-primary-subtle text-primary">25 min / 5 min</span>
+              <i class="bi bi-stopwatch text-primary fs-5"></i>
+            </div>
+            <h5 class="fw-bold">Pomodoro</h5>
+            <p class="text-muted small">
+              Administra el tiempo de estudio mediante bloques de concentración y descansos cortos.
+            </p>
+          </div>
+          <a routerLink="/pomodoro" class="btn boton_principal w-100 mt-3">Comenzar Pomodoro</a>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3">
+        <div class="metodo_tarjeta">
+          <div>
+            <div class="d-flex justify-content-between mb-3">
+              <span class="badge bg-primary-subtle text-primary">Memoria Activa</span>
+              <i class="bi bi-lightning-charge text-primary fs-5"></i>
+            </div>
+            <h5 class="fw-bold">Recuperación Activa</h5>
+            <p class="text-muted small">
+              Practica la memoria activa formulando preguntas y recordando conceptos sin ver tus
+              notas.
+            </p>
+          </div>
+          <button
+            type="button"
+            (click)="seleccionarVista('recuperacion')"
+            class="btn btn-outline-primary w-100 mt-3 fw-semibold"
+          >
+            Ingresar al método
+          </button>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3">
+        <div class="metodo_tarjeta">
+          <div>
+            <div class="d-flex justify-content-between mb-3">
+              <span class="badge bg-warning-subtle text-warning">Estructura 3:1</span>
+              <i class="bi bi-journal-text text-warning fs-5"></i>
+            </div>
+            <h5 class="fw-bold">Método Cornell</h5>
+            <p class="text-muted small">
+              Organiza tus apuntes en tres secciones: notas de clase, palabras clave y resumen
+              sintético.
+            </p>
+          </div>
+          <a routerLink="/cornell" class="btn btn-outline-primary w-100 mt-3 fw-semibold"
+            >Ingresar al método</a
+          >
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3">
+        <div class="metodo_tarjeta">
+          <div>
+            <div class="d-flex justify-content-between mb-3">
+              <span class="badge bg-success-subtle text-success">Largo Plazo</span>
+              <i class="bi bi-calendar2-week text-success fs-5"></i>
+            </div>
+            <h5 class="fw-bold">Técnica Espaciada</h5>
+            <p class="text-muted small">
+              Organiza y programa los repasos de los temas estudiados en intervalos óptimos para
+              evitar el olvido.
+            </p>
+          </div>
+          <button
+            type="button"
+            (click)="seleccionarVista('espaciado')"
+            class="btn btn-outline-primary w-100 mt-3 fw-semibold"
+          >
+            Ingresar al método
+          </button>
+        </div>
+      </div>
+    </div>
+
+    @if (vistaActiva === 'recuperacion') {
+      <div class="tarjeta_sistema p-4 mb-5 pantalla_metodo_recuperacion_activa">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <div>
+            <span class="etiqueta_suave mb-1">MÉTODOS DE ESTUDIO • MODO EVOCACIÓN FORZADA</span>
+            <h4 class="fw-bold mb-0">Método de Recuperación Activa</h4>
+          </div>
+          <button
+            type="button"
+            class="btn btn-sm btn-outline-secondary"
+            (click)="seleccionarVista('catalogo')"
+          >
+            Cerrar vista
+          </button>
+        </div>
+        <div class="row g-4 mt-1">
+          <div class="col-lg-8">
+            <div class="recuperacion_tarjeta_pregunta">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <span class="badge bg-primary-subtle text-primary"
+                  >FISIOPATOLOGÍA CARDIOVASCULAR</span
+                >
+                <span class="small text-muted fw-semibold">Pregunta 4 de 12 (33% completado)</span>
+              </div>
+              <h5 class="fw-bold mb-3">
+                ¿Cuál es el mecanismo de acción de los inhibidores de la ECA (IECA) y cuál es su
+                efecto hemodinámico principal sobre la resistencia vascular?
+              </h5>
+              <textarea
+                [(ngModel)]="respuestaUsuario"
+                class="form-control mb-3"
+                rows="3"
+                placeholder="Intenta reconstruir la cascada renina-angiotensina..."
+              ></textarea>
+              <div class="d-flex gap-2 mb-3">
+                <button
+                  type="button"
+                  (click)="mostrarSolucion = !mostrarSolucion"
+                  class="btn boton_principal"
+                >
+                  Revelar respuesta correcta
+                </button>
+                <button
+                  type="button"
+                  (click)="respuestaUsuario = ''"
+                  class="btn btn-outline-secondary"
+                >
+                  Limpiar texto
+                </button>
+              </div>
+              @if (mostrarSolucion) {
+                <div class="recuperacion_caja_respuesta">
+                  <h6 class="fw-bold text-success">
+                    <i class="bi bi-check-circle-fill me-1"></i> Solución Canónica & Mecanismo
+                  </h6>
+                  <p class="small mb-2">
+                    Inhiben competitivamente la enzima convertidora de angiotensina (ECA),
+                    bloqueando la conversión de Angiotensina I en Angiotensina II. Disminuyen la
+                    resistencia vascular periférica (RVP) sin inducir taquicardia refleja y reducen
+                    la secreción de aldosterona.
+                  </p>
+                  <div class="d-flex gap-2 mt-2">
+                    <button
+                      type="button"
+                      (click)="dominadas = dominadas + 1"
+                      class="btn btn-sm btn-success"
+                    >
+                      Dominada
+                    </button>
+                    <button
+                      type="button"
+                      (click)="dudosas = dudosas + 1"
+                      class="btn btn-sm btn-warning"
+                    >
+                      Dudosa
+                    </button>
+                    <button
+                      type="button"
+                      (click)="repasar = repasar + 1"
+                      class="btn btn-sm btn-danger"
+                    >
+                      Por repasar
+                    </button>
+                  </div>
+                </div>
+              }
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="tarjeta_sistema p-3 mb-3">
+              <h6 class="fw-bold mb-2">Estadísticas de la Sesión</h6>
+              <div class="row text-center g-2">
+                <div class="col-4">
+                  <div class="p-2 bg-success-subtle text-success rounded-3">
+                    <div class="h5 fw-bold mb-0">{{ dominadas }}</div>
+                    <div class="small">Dominadas</div>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="p-2 bg-warning-subtle text-warning rounded-3">
+                    <div class="h5 fw-bold mb-0">{{ dudosas }}</div>
+                    <div class="small">Dudosas</div>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="p-2 bg-danger-subtle text-danger rounded-3">
+                    <div class="h5 fw-bold mb-0">{{ repasar }}</div>
+                    <div class="small">Repasar</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tarjeta_sistema p-3">
+              <h6 class="fw-bold mb-2">Nueva tarjeta de estudio</h6>
+              <form (ngSubmit)="guardarTarjeta()">
+                <input
+                  type="text"
+                  name="pregunta"
+                  [(ngModel)]="nuevaTarjeta.pregunta"
+                  class="form-control form-control-sm mb-2"
+                  placeholder="Pregunta de reto..."
+                  required
+                />
+                <textarea
+                  name="respuesta"
+                  [(ngModel)]="nuevaTarjeta.respuesta"
+                  class="form-control form-control-sm mb-2"
+                  rows="2"
+                  placeholder="Respuesta esperada..."
+                  required
+                ></textarea>
+                @if (tarjetaGuardada) {
+                  <div class="alert alert-success py-1 small">Tarjeta guardada en el banco.</div>
+                }
+                <button type="submit" class="btn btn-sm boton_principal w-100">
+                  Guardar en el Banco
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+
+    @if (vistaActiva === 'espaciado') {
+      <div class="tarjeta_sistema p-4 mb-5 pantalla_metodo_repaso_espaciado">
+        <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
+          <div>
+            <span class="etiqueta_suave mb-1"
+              >CURVA DEL OLVIDO DE EBBINGHAUS • Repasos Programados</span
+            >
+            <h4 class="fw-bold mb-0">Método de Repaso Espaciado</h4>
+          </div>
+          <div class="d-flex gap-2">
+            <button
+              type="button"
+              class="btn btn-sm boton_principal"
+              (click)="mostrarFormRepaso = !mostrarFormRepaso"
+            >
+              <i class="bi bi-plus-lg me-1"></i> Programar nuevo tema
+            </button>
+            <button
+              type="button"
+              class="btn btn-sm btn-outline-secondary"
+              (click)="seleccionarVista('catalogo')"
+            >
+              Cerrar vista
+            </button>
+          </div>
+        </div>
+
+        @if (mostrarFormRepaso) {
+          <div class="p-3 bg-light rounded-3 border mb-4">
+            <h6 class="fw-bold mb-2">Programar Nuevo Tema de Repaso</h6>
+            <form (ngSubmit)="agregarTemaRepaso()" class="row g-2 align-items-end">
+              <div class="col-md-4">
+                <label class="form-label small fw-semibold">Asignatura</label>
+                <select
+                  name="curso"
+                  [(ngModel)]="nuevoRepaso.curso"
+                  class="form-select form-select-sm"
+                >
+                  <option value="FARMACOLOGÍA">Farmacología Clínica</option>
+                  <option value="FISIOLOGÍA">Fisiología Humana II</option>
+                  <option value="FISIOPATOLOGÍA">Fisiopatología General</option>
+                </select>
+              </div>
+              <div class="col-md-5">
+                <label class="form-label small fw-semibold">Nombre del Tema</label>
+                <input
+                  type="text"
+                  name="tema"
+                  [(ngModel)]="nuevoRepaso.tema"
+                  class="form-control form-control-sm"
+                  placeholder="Receptores Adrenérgicos y Agonistas Beta"
+                  required
+                />
+              </div>
+              <div class="col-md-3">
+                <button type="submit" class="btn btn-sm boton_principal w-100">
+                  Programar Repasos
+                </button>
+              </div>
+            </form>
+          </div>
+        }
+
+        <div class="d-flex flex-column gap-3">
+          @for (item of temasRepaso; track $index) {
+            <div
+              class="repaso_tarjeta_tema d-flex flex-wrap justify-content-between align-items-center gap-3"
+            >
+              <div>
+                <span class="badge bg-primary-subtle text-primary me-2">{{ item.curso }}</span>
+                <span
+                  class="badge"
+                  [ngClass]="
+                    item.repasado
+                      ? 'bg-success-subtle text-success'
+                      : 'bg-warning-subtle text-warning'
+                  "
+                >
+                  {{ item.repasado ? 'Repasado' : 'Pendiente hoy' }}
+                </span>
+                <h6 class="fw-bold mt-2 mb-1">{{ item.tema }}</h6>
+                <div class="small text-muted">{{ item.detalle }}</div>
+              </div>
+              <button
+                type="button"
+                (click)="item.repasado = !item.repasado"
+                class="btn btn-sm"
+                [ngClass]="item.repasado ? 'btn-outline-success' : 'boton_principal'"
+              >
+                {{ item.repasado ? 'Completado ✓' : 'Marcar como repasado' }}
+              </button>
+            </div>
+          }
+        </div>
+      </div>
+    }
+
+    <div class="metodos_banner_sinergia">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-8">
+          <span class="badge bg-warning text-dark mb-2"
+            >CONSEJO DE ESTUDIO DEL DÍA · Sinergia sugerida</span
+          >
+          <h4 class="fw-bold">Combina Pomodoro con Recuperación Activa para exámenes</h4>
+          <p class="small opacity-75 mb-0">
+            Utiliza los 25 minutos de cada bloque Pomodoro para escribir preguntas clave y
+            autoevaluarte sin consultar el libro. Dedica los últimos 5 minutos a verificar lagunas
+            conceptuales.
+          </p>
+        </div>
+        <div class="col-lg-4 text-lg-end">
+          <div class="bg-white bg-opacity-10 rounded-3 p-3 d-inline-block text-start">
+            <div class="small text-warning fw-bold">TU MÉTODO MÁS USADO</div>
+            <div class="h5 fw-bold mb-0">Pomodoro (6 sesiones)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
