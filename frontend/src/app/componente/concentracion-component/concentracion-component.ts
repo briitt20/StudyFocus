@@ -21,9 +21,7 @@ export class ConcentracionComponent {
 
   historial = [
     { fecha: '24/10/2024', metodo: 'Pomodoro', nivelTexto: 'Excelente', badgeClase: 'bg-success-subtle text-success' },
-    { fecha: '23/10/2024', metodo: 'Recuperación Activa', nivelTexto: 'Alto', badgeClase: 'bg-primary-subtle text-primary' },
-    { fecha: '22/10/2024', metodo: 'Método Cornell', nivelTexto: 'Medio', badgeClase: 'bg-warning-subtle text-warning' },
-    { fecha: '22/10/2024', metodo: 'Repetición Espaciada', nivelTexto: 'Alto', badgeClase: 'bg-primary-subtle text-primary' }
+    { fecha: '22/10/2024', metodo: 'Método Cornell', nivelTexto: 'Medio', badgeClase: 'bg-warning-subtle text-warning' }
   ];
 
   seleccionarNivel(valor: number) {

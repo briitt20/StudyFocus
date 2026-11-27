@@ -257,7 +257,7 @@ body {
 }
 
 /* =========================================================
-   MÉTODOS DE ESTUDIO, RECUPERACIÓN Y REPASO ESPACIADO
+   MÉTODOS DE ESTUDIO
    ========================================================= */
 .metodo_tarjeta {
   background-color: var(--sf-surface);
@@ -274,27 +274,6 @@ body {
 .metodo_tarjeta:hover {
   transform: translateY(-3px);
   box-shadow: 0 10px 20px rgba(15, 23, 42, 0.06);
-}
-
-.recuperacion_tarjeta_pregunta {
-  background-color: #f8fafc;
-  border: 1px solid var(--sf-border);
-  border-radius: 14px;
-  padding: 1.5rem;
-}
-
-.recuperacion_caja_respuesta {
-  background-color: #f0fdf4;
-  border: 1px solid #bbf7d0;
-  border-radius: 12px;
-  padding: 1rem 1.25rem;
-}
-
-.repaso_tarjeta_tema {
-  background-color: #f8fafc;
-  border: 1px solid var(--sf-border);
-  border-radius: 12px;
-  padding: 1rem 1.25rem;
 }
 
 .metodos_banner_sinergia {
