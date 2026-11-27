@@ -195,19 +195,6 @@
                 </select>
               </div>
               <div class="col-6">
-                <label for="curso_actividad" class="form-label small fw-semibold">Asignatura</label>
-                <input
-                  type="text"
-                  id="curso_actividad"
-                  name="asignatura"
-                  [(ngModel)]="nuevaActividad.asignatura"
-                  class="form-control form-control-sm"
-                  required
-                />
-              </div>
-            </div>
-            <div class="row g-2 mb-3">
-              <div class="col-6">
                 <label for="fecha_actividad" class="form-label small fw-semibold">Fecha</label>
                 <input
                   type="date"
@@ -218,18 +205,10 @@
                   required
                 />
               </div>
-              <div class="col-6">
-                <label for="hora_actividad" class="form-label small fw-semibold">Hora</label>
-                <input
-                  type="time"
-                  id="hora_actividad"
-                  name="hora"
-                  [(ngModel)]="nuevaActividad.hora"
-                  class="form-control form-control-sm"
-                  required
-                />
-              </div>
             </div>
+            @if (errorMensaje) {
+              <div class="alert alert-danger py-1 small">{{ errorMensaje }}</div>
+            }
             @if (actividadGuardada) {
               <div class="alert alert-success py-1 small">Actividad agregada al calendario.</div>
             }
@@ -237,6 +216,22 @@
               Guardar actividad en el calendario
             </button>
           </form>
+          <!-- Lista de eventos cargados desde el backend -->
+          @if (eventos.length > 0) {
+            <ul class="list-group list-group-flush mt-3">
+              @for (ev of eventos; track ev.id_evento) {
+                <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                  <div>
+                    <strong>{{ ev.titulo }}</strong>
+                    <div class="small text-muted">{{ ev.fecha }} · {{ ev.tipo }}</div>
+                  </div>
+                  <button class="btn btn-outline-danger btn-sm" (click)="eliminarEvento(ev.id_evento)">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </li>
+              }
+            </ul>
+          }
         </div>
       </div>
     </div>

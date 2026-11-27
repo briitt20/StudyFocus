@@ -9,18 +9,19 @@ import { PerfilComponent } from './componente/perfil-component/perfil-component'
 import { PomodoroComponent } from './componente/pomodoro-component/pomodoro-component';
 import { PortadaComponent } from './componente/portada-component/portada-component';
 import { SesionComponent } from './componente/sesion-component/sesion-component';
+import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
-    { path: '', component: PortadaComponent }, // <-- Cambiado a PortadaComponent
-  { path: 'login', component: LoginComponent },
-  { path: 'inicio', component: InicioComponent },
-  { path: 'calendario', component: CalendarioComponent },
-  { path: 'concentracion', component: ConcentracionComponent },
-  { path: 'cornell', component: CornellComponent },
-  { path: 'metodos', component: MetodosComponent },
-  { path: 'perfil', component: PerfilComponent },
-  { path: 'pomodoro', component: PomodoroComponent },
+  { path: '', component: PortadaComponent },
   { path: 'portada', component: PortadaComponent },
-  { path: 'sesion', component: SesionComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'inicio',         component: InicioComponent,         canActivate: [authGuard] },
+  { path: 'calendario',     component: CalendarioComponent,     canActivate: [authGuard] },
+  { path: 'concentracion',  component: ConcentracionComponent,  canActivate: [authGuard] },
+  { path: 'cornell',        component: CornellComponent,        canActivate: [authGuard] },
+  { path: 'metodos',        component: MetodosComponent,        canActivate: [authGuard] },
+  { path: 'perfil',         component: PerfilComponent,         canActivate: [authGuard] },
+  { path: 'pomodoro',       component: PomodoroComponent,       canActivate: [authGuard] },
+  { path: 'sesion',         component: SesionComponent,         canActivate: [authGuard] },
   { path: '**', redirectTo: '' }
 ];

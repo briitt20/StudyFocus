@@ -1,54 +1,33 @@
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { MetodoService } from '../../core/services/metodo.service';
+import { MetodoOut } from '../../core/models/metodo.model';
 
 @Component({
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, RouterLink],
   selector: 'app-metodos-component',
   styleUrl: './metodos-component.css',
   templateUrl: './metodos-component.html',
 })
-export class MetodosComponent {
-  vistaActiva: 'catalogo' | 'recuperacion' | 'espaciado' = 'catalogo';
+export class MetodosComponent implements OnInit {
+  private metodoService = inject(MetodoService);
 
-  respuestaUsuario = '';
-  mostrarSolucion = false;
-  dominadas = 8;
-  dudosas = 3;
-  repasar = 1;
-  nuevaTarjeta = { pregunta: '', respuesta: '' };
-  tarjetaGuardada = false;
+  metodos: MetodoOut[] = [];
+  cargando = false;
+  errorMensaje = '';
 
-  mostrarFormRepaso = false;
-  nuevoRepaso = { curso: 'FARMACOLOGÍA', tema: '' };
-  temasRepaso = [
-    { curso: 'FARMACOLOGÍA', tema: 'Betalactámicos y Cefalosporinas', detalle: 'Repaso 1 (Día 1) · Hoy, 24 Nov', repasado: false },
-    { curso: 'FISIOLOGÍA', tema: 'Potencial de acción neuronal y transmisión sináptica', detalle: 'Repaso 2 (Día 3) · Hoy, 24 Nov', repasado: false },
-    { curso: 'CÁLCULO III', tema: 'Integrales triples y coordenadas esféricas', detalle: 'Repaso 1 (Día 1) · Hoy, 24 Nov', repasado: false }
-  ];
-
-  seleccionarVista(vista: 'catalogo' | 'recuperacion' | 'espaciado') {
-    this.vistaActiva = vista;
-  }
-
-  guardarTarjeta() {
-    if (this.nuevaTarjeta.pregunta && this.nuevaTarjeta.respuesta) {
-      this.tarjetaGuardada = true;
-      this.nuevaTarjeta = { pregunta: '', respuesta: '' };
-    }
-  }
-
-  agregarTemaRepaso() {
-    if (this.nuevoRepaso.tema.trim()) {
-      this.temasRepaso.unshift({
-        curso: this.nuevoRepaso.curso,
-        tema: this.nuevoRepaso.tema.trim(),
-        detalle: 'Sesión 0 (Hoy) · Próximo repaso +24h',
-        repasado: false
-      });
-      this.nuevoRepaso.tema = '';
-      this.mostrarFormRepaso = false;
-    }
+  ngOnInit(): void {
+    this.cargando = true;
+    this.metodoService.getMetodos().subscribe({
+      next: (data) => {
+        this.metodos = data;
+        this.cargando = false;
+      },
+      error: () => {
+        this.cargando = false;
+        this.errorMensaje = 'No se pudieron cargar los métodos de estudio.';
+      }
+    });
   }
 }

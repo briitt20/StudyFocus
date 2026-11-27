@@ -50,6 +50,9 @@
         </button>
       </div>
 
+      @if (errorMensaje) {
+        <div class="alert alert-danger py-2 small">{{ errorMensaje }}</div>
+      }
       @if (apunteGuardado) {
         <div class="alert alert-success py-2 small">
           Apunte estructurado guardado en la base de datos.
@@ -65,7 +68,7 @@
             <input
               type="text"
               name="titulo_apunte"
-              [(ngModel)]="apunte.titulo"
+              [(ngModel)]="apunte.tema"
               class="form-control form-control-sm fw-bold"
               required
             />
@@ -92,7 +95,7 @@
             </div>
             <textarea
               name="preguntas_clave"
-              [(ngModel)]="apunte.preguntasClave"
+              [(ngModel)]="apunte.clave"
               class="form-control form-control-sm"
               rows="2"
               placeholder="Escribe nuevas preguntas clave aquí..."
@@ -105,7 +108,7 @@
             </h6>
             <textarea
               name="contenido_notas"
-              [(ngModel)]="apunte.notas"
+              [(ngModel)]="apunte.apunte"
               class="form-control"
               rows="10"
               required

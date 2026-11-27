@@ -43,10 +43,9 @@
             <span class="badge bg-primary-subtle text-primary mb-1"
               >ESTUDIANTE REGULAR · Ciclo Clínico VII · UNMSM</span
             >
-            <h4 class="fw-bold mb-0">{{ estudiante.nombres }} {{ estudiante.apellidos }}</h4>
+            <h4 class="fw-bold mb-0">{{ estudiante.nombre }}</h4>
             <div class="small text-muted">
-              {{ estudiante.carrera }} · Facultad de Medicina San Fernando · Cód:
-              {{ estudiante.codigo }}-MED
+              {{ estudiante.carrera || 'Sin carrera' }} · Ciclo {{ estudiante.ciclo || '-' }} · {{ estudiante.correo }}
             </div>
           </div>
         </div>
@@ -71,39 +70,27 @@
             <div class="row g-3 mb-3">
               <div class="col-md-6">
                 <label for="perfil_nombres" class="form-label small fw-semibold"
-                  >Nombres completos</label
+                  >Nombre completo</label
                 >
                 <input
                   type="text"
                   id="perfil_nombres"
-                  name="nombres"
-                  [(ngModel)]="estudiante.nombres"
+                  name="nombre"
+                  [(ngModel)]="estudiante.nombre"
                   class="form-control"
                   required
                 />
               </div>
               <div class="col-md-6">
-                <label for="perfil_apellidos" class="form-label small fw-semibold">Apellidos</label>
+                <label for="perfil_ciclo" class="form-label small fw-semibold">Ciclo</label>
                 <input
-                  type="text"
-                  id="perfil_apellidos"
-                  name="apellidos"
-                  [(ngModel)]="estudiante.apellidos"
+                  type="number"
+                  id="perfil_ciclo"
+                  name="ciclo"
+                  [(ngModel)]="estudiante.ciclo"
                   class="form-control"
-                  required
-                />
-              </div>
-              <div class="col-md-6">
-                <label for="perfil_codigo" class="form-label small fw-semibold"
-                  >Código Universitario</label
-                >
-                <input
-                  type="text"
-                  id="perfil_codigo"
-                  name="codigo_universitario"
-                  [(ngModel)]="estudiante.codigo"
-                  class="form-control"
-                  required
+                  min="1"
+                  max="14"
                 />
               </div>
               <div class="col-md-6">
@@ -116,6 +103,7 @@
                   name="correo"
                   [(ngModel)]="estudiante.correo"
                   class="form-control"
+                  [readonly]="true"
                   required
                 />
               </div>
@@ -132,19 +120,10 @@
                   required
                 />
               </div>
-              <div class="col-md-6">
-                <label for="perfil_sede" class="form-label small fw-semibold"
-                  >Sede de Prácticas</label
-                >
-                <input
-                  type="text"
-                  id="perfil_sede"
-                  name="sede"
-                  [(ngModel)]="estudiante.sede"
-                  class="form-control"
-                />
-              </div>
             </div>
+            @if (errorMensaje) {
+              <div class="alert alert-danger py-2 small">{{ errorMensaje }}</div>
+            }
             @if (cambiosGuardados) {
               <div class="alert alert-success py-2 small">
                 Cambios guardados en tu perfil académico.

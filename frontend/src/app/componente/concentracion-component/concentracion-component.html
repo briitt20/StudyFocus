@@ -58,6 +58,15 @@
         }
       </div>
 
+      <div class="mb-3">
+        <button type="button" class="btn boton_principal btn-sm" (click)="guardarSesion()">
+          <i class="bi bi-save me-1"></i> Guardar nivel de concentración
+        </button>
+      </div>
+
+      @if (errorMensaje) {
+        <div class="alert alert-danger py-2 small mb-2">{{ errorMensaje }}</div>
+      }
       @if (sesionGuardada) {
         <div class="alert alert-success py-2 small mb-0">
           <i class="bi bi-check-circle-fill me-1"></i>
@@ -84,12 +93,14 @@
             </tr>
           </thead>
           <tbody>
-            @for (reg of historial; track $index) {
+            @for (reg of historial; track reg.id_sesion) {
               <tr>
                 <td>{{ reg.fecha }}</td>
-                <td class="fw-semibold">{{ reg.metodo }}</td>
+                <td class="fw-semibold">{{ reg.nombre_metodo || ('Método #' + reg.id_metodo) }}</td>
                 <td>
-                  <span class="badge" [ngClass]="reg.badgeClase">● {{ reg.nivelTexto }}</span>
+                  <span class="badge" [ngClass]="obtenerBadgeClase(reg.concentracion)">
+                    ● {{ obtenerNivelTexto(reg.concentracion) }}
+                  </span>
                 </td>
               </tr>
             }

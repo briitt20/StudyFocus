@@ -1,35 +1,105 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { CornellService } from '../../core/services/cornell.service';
+import { CornellOut, CornellCreate } from '../../core/models/cornell.model';
 
 @Component({
-  imports: [FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink],
   selector: 'app-cornell-component',
   styleUrl: './cornell-component.css',
   templateUrl: './cornell-component.html',
 })
-export class CornellComponent {
+export class CornellComponent implements OnInit {
+  private cornellService = inject(CornellService);
+
+  notas: CornellOut[] = [];
+  notaActiva: CornellOut | null = null;
   apunteGuardado = false;
+  cargando = false;
+  errorMensaje = '';
 
-  apunte = {
-    titulo: 'Regulación de la Presión Arterial y Sistema RAA',
-    preguntasClave: '',
-    notas: `1. Cascada Enzimática y Disparadores Renales:
-Las células yuxtaglomerulares (YXG) de la arteriola aferente sensan baja presión de perfusión renal (vía barorreceptores locales) o hiponatremia detectada por la mácula densa.
-
-2. Conversión Periférica en Cascada:
-Angiotensinógeno de origen hepático se fragmenta en Angiotensina I por acción de la renina. La ECA pulmonar cataliza su paso a Angiotensina II.
-
-3. Efectos Sistémicos:
-- Vasoconstricción arteriolar directa (incremento de RVP).
-- Estimulación de síntesis de Aldosterona en corteza suprarrenal.
-- Activación de sed y secreción de ADH en hipotálamo.`,
-    resumen: 'El sistema Renina-Angiotensina-Aldosterona regula la presión arterial a mediano y largo plazo incrementando la resistencia vascular periférica y la retención renal de sodio y agua.'
+  // Formulario de nueva nota — campos alineados al backend
+  apunte: CornellCreate = {
+    tema: '',
+    clave: '',
+    apunte: '',
+    resumen: ''
   };
 
-  guardarApunte() {
-    if (this.apunte.titulo && this.apunte.notas && this.apunte.resumen) {
-      this.apunteGuardado = true;
+  ngOnInit(): void {
+    this.cargarNotas();
+  }
+
+  cargarNotas(): void {
+    this.cargando = true;
+    this.cornellService.getNotas().subscribe({
+      next: (data) => {
+        this.notas = data;
+        this.cargando = false;
+      },
+      error: () => {
+        this.cargando = false;
+        this.errorMensaje = 'No se pudieron cargar las notas.';
+      }
+    });
+  }
+
+  seleccionarNota(nota: CornellOut): void {
+    this.notaActiva = nota;
+    this.apunte = {
+      tema: nota.tema,
+      clave: nota.clave ?? '',
+      apunte: nota.apunte ?? '',
+      resumen: nota.resumen ?? ''
+    };
+    this.apunteGuardado = false;
+  }
+
+  nuevaNota(): void {
+    this.notaActiva = null;
+    this.apunte = { tema: '', clave: '', apunte: '', resumen: '' };
+    this.apunteGuardado = false;
+    this.errorMensaje = '';
+  }
+
+  guardarApunte(): void {
+    if (!this.apunte.tema || !this.apunte.apunte || !this.apunte.resumen) return;
+    this.errorMensaje = '';
+
+    if (this.notaActiva) {
+      // Actualizar nota existente
+      this.cornellService.updateNota(this.notaActiva.id_nota, this.apunte).subscribe({
+        next: (updated) => {
+          const idx = this.notas.findIndex(n => n.id_nota === updated.id_nota);
+          if (idx !== -1) this.notas[idx] = updated;
+          this.notaActiva = updated;
+          this.apunteGuardado = true;
+        },
+        error: () => { this.errorMensaje = 'Error al actualizar la nota.'; }
+      });
+    } else {
+      // Crear nueva nota
+      this.cornellService.createNota(this.apunte).subscribe({
+        next: (nueva) => {
+          this.notas.push(nueva);
+          this.notaActiva = nueva;
+          this.apunteGuardado = true;
+        },
+        error: () => { this.errorMensaje = 'Error al guardar la nota.'; }
+      });
     }
+  }
+
+  eliminarNota(id: number, event: Event): void {
+    event.stopPropagation();
+    this.cornellService.deleteNota(id).subscribe({
+      next: () => {
+        this.notas = this.notas.filter(n => n.id_nota !== id);
+        if (this.notaActiva?.id_nota === id) this.nuevaNota();
+      },
+      error: () => { this.errorMensaje = 'Error al eliminar la nota.'; }
+    });
   }
 }
